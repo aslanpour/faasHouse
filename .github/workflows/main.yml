@@ -1,0 +1,8 @@
+name: run-hedgi
+run-name: ${{ github.actor }} is running hedgi from github
+on: [push]
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo systemctl restart hedgi.service
