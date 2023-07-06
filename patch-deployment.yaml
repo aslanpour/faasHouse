@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ssd-tpu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ssd-app
+  template:
+    metadata:
+      labels:
+        app: ssd-app
+    spec:
+      #The node that has TPU and/or GPU
+      nodeName: w5
+      containers:
+      - name: ssd-tpu
+        image: aslanpour/ssd:cpu-tpu
+        imagePullPolicy: Always
+        #securityContext:
+          #--privileged
+          #privileged: true
+          #--user root
+          #runAsUser: 0
+        #/dev/usb/bus
+        #volumeMounts:
+        #- mountPath: /dev/bus/usb
+          #name: usb-devices
+      #-v /dev/usb/bus:
+      #volumes:
+      #- name: usb-devices
+        #hostPath:
+          #path: /dev/bus/usb

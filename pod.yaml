@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginxw5
+spec:
+  nodeName: silly
+  #schedulerName: default-scheduler
+  containers:
+  - name: nvidia
+    image: nginx:1.14.2
+    #image: xift/jetson_devicequery:r32.5.0
+    #command: [ "bin/bash" ]

@@ -1,0 +1,225 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    com.openfaas.function.spec: '{"name":"w4-ssd","image":"aslanpour/ssd:cpu-tpu","annotations":{"com.openfaas.profile":"w4-ssd","linkerd.io/inject":"enabled"},"labels":{"com.openfaas.scale.factor":"100","com.openfaas.scale.max":"1","com.openfaas.scale.min":"1","com.openfaas.scale.zero":"true"},"environment":{"COUNTER":"0","REDIS_SERVER_IP":"10.43.189.161","REDIS_SERVER_PORT":"3679","exec_timeout":"15s","handler_wait_duration":"15s","read_timeout":"15s","version":"1","write_debug":"true","write_timeout":"15s"},"limits":{"cpu":"3600m"},"requests":{"cpu":"1000m"},"readOnlyRootFilesystem":false}'
+    com.openfaas.profile: w4-ssd
+    deployment.kubernetes.io/revision: "2"
+    linkerd.io/inject: enabled
+    prometheus.io.scrape: "false"
+  creationTimestamp: "2022-11-18T06:49:03Z"
+  generation: 2
+  name: w4-ssd
+  namespace: openfaas-fn
+  ownerReferences:
+  - apiVersion: openfaas.com/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Function
+    name: w4-ssd
+    uid: 88384673-6798-449a-af0c-6e97deef28b5
+  resourceVersion: "8859533"
+  uid: 86a705e3-ea02-49ef-aadf-90c158b4b0c6
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: w4-ssd
+      controller: w4-ssd
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        com.openfaas.function.spec: '{"name":"w4-ssd","image":"aslanpour/ssd:cpu-tpu","annotations":{"com.openfaas.profile":"w4-ssd","linkerd.io/inject":"enabled"},"labels":{"com.openfaas.scale.factor":"100","com.openfaas.scale.max":"1","com.openfaas.scale.min":"1","com.openfaas.scale.zero":"true"},"environment":{"COUNTER":"0","REDIS_SERVER_IP":"10.43.189.161","REDIS_SERVER_PORT":"3679","exec_timeout":"15s","handler_wait_duration":"15s","read_timeout":"15s","version":"1","write_debug":"true","write_timeout":"15s"},"limits":{"cpu":"3600m"},"requests":{"cpu":"1000m"},"readOnlyRootFilesystem":false}'
+        com.openfaas.profile: w4-ssd
+        linkerd.io/inject: enabled
+        prometheus.io.scrape: "false"
+      creationTimestamp: null
+      labels:
+        app: w4-ssd
+        com.openfaas.scale.factor: "100"
+        com.openfaas.scale.max: "1"
+        com.openfaas.scale.min: "1"
+        com.openfaas.scale.zero: "true"
+        controller: w4-ssd
+        faas_function: w4-ssd
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - preference:
+              matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - unknown
+            weight: 50
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - w4
+                - unknown
+                - unknown
+                - unknown
+                - unknown
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: faas_function
+                  operator: In
+                  values:
+                  - unknown
+              topologyKey: kubernetes.io/hostname
+            weight: 50
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: faas_function
+                operator: In
+                values:
+                - unknown
+            topologyKey: kubernetes.io/hostname
+      containers:
+      - env:
+        - name: read_timeout
+          value: 15s
+        - name: version
+          value: "1"
+        - name: handler_wait_duration
+          value: 15s
+        - name: REDIS_SERVER_IP
+          value: 10.43.189.161
+        - name: REDIS_SERVER_PORT
+          value: "3679"
+        - name: exec_timeout
+          value: 15s
+        - name: write_debug
+          value: "true"
+        - name: write_timeout
+          value: 15s
+        - name: COUNTER
+          value: "0"
+        - name: MODEL_PRE_LOAD
+          value: "yes"
+        - name: MODEL_RUN_ON
+          value: tpu
+        - name: MODEL_CPU_WORKERS
+          value: "1"
+        - name: WAITRESS_THREADS
+          value: "1"
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.podIP
+        - name: POD_IPS
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.podIPs
+        - name: POD_HOST_IP
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.hostIP
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        image: aslanpour/ssd:cpu-tpu
+        imagePullPolicy: Never
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /_/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 2
+          periodSeconds: 2
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: w4-ssd
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /_/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 2
+          periodSeconds: 2
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 3600m
+          requests:
+            cpu: "1"
+        securityContext:
+          allowPrivilegeEscalation: true
+          privileged: true
+          readOnlyRootFilesystem: false
+          runAsUser: 0
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /dev/bus/usb
+          name: usb-devices
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /dev/bus/usb
+          type: ""
+        name: usb-devices
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2022-11-18T06:49:07Z"
+    lastUpdateTime: "2022-11-18T06:49:07Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2022-11-18T06:49:03Z"
+    lastUpdateTime: "2022-11-18T06:49:07Z"
+    message: ReplicaSet "w4-ssd-f45bc75f5" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

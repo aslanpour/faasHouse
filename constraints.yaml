@@ -1,0 +1,46 @@
+apiVersion: openfaas.com/v1
+kind: Function
+metadata:
+  name: nodeinfo
+  namespace: openfaas-fn
+spec:
+  name: nodeinfo
+  image: ghcr.io/openfaas/nodeinfo:latest
+  labels: {}
+  annotations: {}
+---
+apiVersion: openfaas.com/v1
+kind: Function
+metadata:
+  name: nodeinfo2
+  namespace: openfaas-fn
+spec:
+  name: nodeinfo2
+  image: ghcr.io/openfaas/nodeinfo:latest
+  annotations:
+    com.openfaas.profile: homo1-ssd
+    com.openfaas.queue: ""
+    linkerd.io/inject: enabled
+  environment:
+    COUNTER: "0"
+    REDIS_SERVER_IP: 10.43.189.161
+    REDIS_SERVER_PORT: "3679"
+    exec_timeout: 15s
+    handler_wait_duration: 15s
+    read_timeout: 15s
+    version: "1"
+    write_debug: "true"
+    write_timeout: 15s
+  labels:
+    com.openfaas.scale.factor: "0"
+    com.openfaas.scale.max: "1"
+    com.openfaas.scale.min: "1"
+  limits:
+    cpu: 3600m
+    memory: 3000M
+  name: homo1-ssd
+  requests:
+    cpu: 1800m
+    memory: 50M
+  # constraints: []
+ 

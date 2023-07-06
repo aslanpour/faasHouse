@@ -1,0 +1,5 @@
+Run test_pioss.py on Image-URL:http://10.0.0.95:5005/ and put an image file in the directory it needs.
+Run owl_actuator.py on http://10.0.0.95:5006/
+Deploy your function 10.0.0.90:31112/function/ssd-tpu/
+send async request to function
+curl -X POST -i -H "X-Callback-Url: http://10.0.0.95:5006/" -H "Image-URL:http://10.0.0.95:5005/"  10.0.0.90:31112/function/ssd-tpu/

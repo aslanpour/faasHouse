@@ -1,0 +1,100 @@
+tac logs/hedgi.log|grep -B 1000 -m 1  "MAPE LOOP START"| tac | less
+
+close_wait connecitons
+netstat -an | grep 'CLOSE_WAIT' | grep ':5000'
+ss -an state CLOSE-WAIT '( sport = :5000 )'
+
+Check if remote servier listening on port 
+nmap 10.0.0.11 -p 80
+locally
+sudo netstat -plnt | grep apache
+
+#check if a port is open on a server
+locally:
+telnet localhost 90
+remotely
+telnet ip_address 80
+
+
+ssh ubuntu@10.0.0.70 kill -9 $(ps -aux |grep hedgi | awk '{print $2}')
+ssh ubuntu@10.0.0.70 nohup python3 /home/ubuntu/hedgi.py> hedgi.out 2> hedgi.err < /dev/null &
+cmd = "ssh " + user_name + "@" + ip + " 'kill -9 $(ps -aux | grep " + agent_name + " | awk \"{print \$2}\")'"
+
+pi power reduction
+https://github.com/seamusdemora/PiFormulae/blob/master/RPi4bSleep.md
+
+
+kill
+for i in {0..9}; do ssh ubuntu@10.0.0.87 "kill -9 \$(ps -aux |grep hedg | awk '{print \$2}')"; done
+Run
+for i in {0..9}; do ssh ubuntu@10.0.0.8$i nohup python3 hedgi.py > hedgi.out 2> hedgi.err < /dev/null & echo "$i done"; done
+--------------------
+master
+sudo ifdown --exclude=lo -a -v && sudo ifup --exclude=lo -a -v
+sudo systemctl restart NetworkManager.service 
+
+sudo systemctl restart k3s.service
+
+kubectl -n kube-system rollout restart deploy
+
+worker
+sudo ifdown --exclude=lo -a -v && sudo ifup --exclude=lo -a -v
+sudo systemctl restart systemd-networkd
+sudo systemctl restart k3s-agent.service
+-----------------
+pgrep -f hedg |xargs kill && python3 hedgi.py
+---
+test_name
+backends
+algorithm: local / static
+postfix: func_name / ''
+workload concurrency
+object_storage read ip --? local-generator
+
+for locality qos-rt (evaluating if latency-aware policy runs when all functions read the requested image from their local minio instead of the originating node) 
+and least-request-local-executor
+--> ip in read in object_storage --> local-executor
+
+if least-connection:
+- weights = even if least-request or least-request-p2c is desired; otherwise, weights of backend for thrughput-updated is chosen (like for weighted-least-request)
+- lb_policy = least_request (default is round_robin)
+- backend --> choice_count = default is len(backend) for least-request and weighted-least-request; otherwise, 2 if power of 2 choices is desired (p2c)
+-for least-request-local-executor, set ip in read in object_storage --> local-executor (default is local-generator)
+-------
+edited
+throughput round 4 spawner 1 
+throu 5 -1
+were written 3 -1 and 3- 1 and then fixed
+
+ai 5 - 4 was written 6 - 4 and then fixed
+even 2 - 10 data is overwritten by something else
+energy-total 4-4 and 3-5 are wreritten
+cost 3-6 is overwritten
+
+even metrics of 1,3,4,5-7 were faulty, so metrics of 2-7 are coppied 
+even metrics of 1,2,3,5-8 were faulty, so metrics of 4-8 are coppied 
+even 3-10 was faulty, so metrics of 2-10 was coppied for it 
+energy-total 5-4 was faulty, so metrics of 2-4 was coppied for it 
+ai-precision 2-9 was missing, so metrics of 1-9 was coppied for it
+ai-precision 1,2,3,4,-10 missing, so metrics of 1-9 is coppied for
+cost 2-5 was missing, so metrics of 1-5 was coppied for it 
+energy-processing 2-2 was faulty, so 1-2 was coppied for
+-----
+throughput logs for spawner 1 and 2 round 4, 5 missing, so from round 3 spawner 1 and 2 coppied for
+throughput logs for spawner 2 round 4 w7 was missing, so from round 3 is coppied for
+cost logs for spawner 5 round 2 w4 was missing, so from round 1 is coppied for
+eneergy total for spawner 10 round 4 w4 was missing, so from round 3 coppied for
+-------
+cpu-freq policy experimetns are done for 1-1 to 2-4
+----
+nohup python3 hedgi.py > hedgi.out 2> hedgi.err < /dev/null &
+
+---
+for i in {1..7}; do ssh ubuntu@10.0.0.9$i sudo reboot && echo "w$i done"; done 
+
+ssh w2 nohup python3 hedgi.py > hedgi.out 2> hedgi.err < /dev/null &
+ssh w2 nohup minio server /home/ubuntu/data > mini.out 2> mini.err < /dev/null &
+
+
+
+must be deleted: event_bus added to pioss for local algorithm to read image remotely

@@ -1,0 +1,192 @@
+{
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": {
+        "annotations": {
+            "com.openfaas.function.spec": "{\"name\":\"homo1-ssd\",\"image\":\"aslanpour/ssd:cpu-tpu\",\"annotations\":{\"com.openfaas.profile\":\"homo1-ssd\",\"linkerd.io/inject\":\"enabled\"},\"labels\":{\"com.openfaas.scale.factor\":\"0\",\"com.openfaas.scale.max\":\"1\",\"com.openfaas.scale.min\":\"1\",\"com.openfaas.scale.zero\":\"true\"},\"environment\":{\"COUNTER\":\"0\",\"REDIS_SERVER_IP\":\"10.43.189.161\",\"REDIS_SERVER_PORT\":\"3679\",\"exec_timeout\":\"15s\",\"handler_wait_duration\":\"15s\",\"read_timeout\":\"15s\",\"version\":\"3\",\"write_debug\":\"true\",\"write_timeout\":\"15s\"},\"constraints\":[\"kubernetes.io/hostname=homo1\"],\"limits\":{\"cpu\":\"3600m\"},\"requests\":{\"cpu\":\"1800m\"},\"readOnlyRootFilesystem\":false}",
+            "com.openfaas.profile": "homo1-ssd",
+            "deployment.kubernetes.io/revision": "8",
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{\"com.openfaas.function.spec\":\"{\\\"name\\\":\\\"homo1-ssd\\\",\\\"image\\\":\\\"aslanpour/ssd:cpu-tpu\\\",\\\"annotations\\\":{\\\"com.openfaas.profile\\\":\\\"homo1-ssd\\\",\\\"linkerd.io/inject\\\":\\\"enabled\\\"},\\\"labels\\\":{\\\"com.openfaas.scale.factor\\\":\\\"0\\\",\\\"com.openfaas.scale.max\\\":\\\"1\\\",\\\"com.openfaas.scale.min\\\":\\\"1\\\",\\\"com.openfaas.scale.zero\\\":\\\"true\\\"},\\\"environment\\\":{\\\"COUNTER\\\":\\\"0\\\",\\\"REDIS_SERVER_IP\\\":\\\"10.43.189.161\\\",\\\"REDIS_SERVER_PORT\\\":\\\"3679\\\",\\\"exec_timeout\\\":\\\"15s\\\",\\\"handler_wait_duration\\\":\\\"15s\\\",\\\"read_timeout\\\":\\\"15s\\\",\\\"version\\\":\\\"3\\\",\\\"write_debug\\\":\\\"true\\\",\\\"write_timeout\\\":\\\"15s\\\"},\\\"constraints\\\":[\\\"kubernetes.io/hostname=homo1\\\"],\\\"limits\\\":{\\\"cpu\\\":\\\"3600m\\\"},\\\"requests\\\":{\\\"cpu\\\":\\\"1800m\\\"},\\\"readOnlyRootFilesystem\\\":false}\",\"com.openfaas.profile\":\"homo1-ssd\",\"deployment.kubernetes.io/revision\":\"8\",\"linkerd.io/inject\":\"enabled\",\"prometheus.io.scrape\":\"false\"},\"creationTimestamp\":\"2023-05-06T05:15:53Z\",\"generation\":12,\"name\":\"homo1-ssd\",\"namespace\":\"openfaas-fn\",\"ownerReferences\":[{\"apiVersion\":\"openfaas.com/v1\",\"blockOwnerDeletion\":true,\"controller\":true,\"kind\":\"Function\",\"name\":\"homo1-ssd\",\"uid\":\"fa53f303-52f4-44eb-8973-1e5fdde4a772\"}],\"resourceVersion\":\"23658520\",\"uid\":\"ee577864-d4af-4651-8400-ad60b78a807c\"},\"spec\":{\"progressDeadlineSeconds\":600,\"replicas\":1,\"revisionHistoryLimit\":5,\"selector\":{\"matchLabels\":{\"app\":\"homo1-ssd\",\"controller\":\"homo1-ssd\"}},\"strategy\":{\"rollingUpdate\":{\"maxSurge\":1,\"maxUnavailable\":1},\"type\":\"RollingUpdate\"},\"template\":{\"metadata\":{\"annotations\":{\"com.openfaas.function.spec\":\"{\\\"name\\\":\\\"homo1-ssd\\\",\\\"image\\\":\\\"aslanpour/ssd:cpu-tpu\\\",\\\"annotations\\\":{\\\"com.openfaas.profile\\\":\\\"homo1-ssd\\\",\\\"linkerd.io/inject\\\":\\\"enabled\\\"},\\\"labels\\\":{\\\"com.openfaas.scale.factor\\\":\\\"0\\\",\\\"com.openfaas.scale.max\\\":\\\"1\\\",\\\"com.openfaas.scale.min\\\":\\\"1\\\",\\\"com.openfaas.scale.zero\\\":\\\"true\\\"},\\\"environment\\\":{\\\"COUNTER\\\":\\\"0\\\",\\\"REDIS_SERVER_IP\\\":\\\"10.43.189.161\\\",\\\"REDIS_SERVER_PORT\\\":\\\"3679\\\",\\\"exec_timeout\\\":\\\"15s\\\",\\\"handler_wait_duration\\\":\\\"15s\\\",\\\"read_timeout\\\":\\\"15s\\\",\\\"version\\\":\\\"3\\\",\\\"write_debug\\\":\\\"true\\\",\\\"write_timeout\\\":\\\"15s\\\"},\\\"constraints\\\":[\\\"kubernetes.io/hostname=homo1\\\"],\\\"limits\\\":{\\\"cpu\\\":\\\"3600m\\\"},\\\"requests\\\":{\\\"cpu\\\":\\\"1800m\\\"},\\\"readOnlyRootFilesystem\\\":false}\",\"com.openfaas.profile\":\"homo1-ssd\",\"linkerd.io/inject\":\"enabled\",\"prometheus.io.scrape\":\"false\"},\"creationTimestamp\":null,\"labels\":{\"app\":\"homo1-ssd\",\"com.openfaas.scale.factor\":\"0\",\"com.openfaas.scale.max\":\"1\",\"com.openfaas.scale.min\":\"1\",\"com.openfaas.scale.zero\":\"true\",\"controller\":\"homo1-ssd\",\"faas_function\":\"homo1-ssd\"}},\"spec\":{\"containers\":[{\"env\":[{\"name\":\"COUNTER\",\"value\":\"0\"},{\"name\":\"REDIS_SERVER_IP\",\"value\":\"10.43.189.161\"},{\"name\":\"write_timeout\",\"value\":\"15s\"},{\"name\":\"version\",\"value\":\"3\"},{\"name\":\"write_debug\",\"value\":\"true\"},{\"name\":\"REDIS_SERVER_PORT\",\"value\":\"3679\"},{\"name\":\"exec_timeout\",\"value\":\"15s\"},{\"name\":\"handler_wait_duration\",\"value\":\"15s\"},{\"name\":\"read_timeout\",\"value\":\"15s\"}],\"image\":\"aslanpour/ssd:cpu-tpu\",\"imagePullPolicy\":\"Always\",\"livenessProbe\":{\"failureThreshold\":3,\"httpGet\":{\"path\":\"/_/health\",\"port\":8080,\"scheme\":\"HTTP\"},\"initialDelaySeconds\":2,\"periodSeconds\":2,\"successThreshold\":1,\"timeoutSeconds\":1},\"name\":\"homo1-ssd\",\"ports\":[{\"containerPort\":8080,\"protocol\":\"TCP\"}],\"readinessProbe\":{\"failureThreshold\":3,\"httpGet\":{\"path\":\"/_/health\",\"port\":8080,\"scheme\":\"HTTP\"},\"initialDelaySeconds\":2,\"periodSeconds\":2,\"successThreshold\":1,\"timeoutSeconds\":1},\"resources\":{\"limits\":{\"cpu\":\"3600m\"},\"requests\":{\"cpu\":\"1800m\"}},\"securityContext\":{\"allowPrivilegeEscalation\":false,\"readOnlyRootFilesystem\":false},\"terminationMessagePath\":\"/dev/termination-log\",\"terminationMessagePolicy\":\"File\"}],\"dnsPolicy\":\"ClusterFirst\",\"nodeSelector\":{\"kubernetes.io/hostname\":\"homo1\"},\"restartPolicy\":\"Always\",\"schedulerName\":\"default-scheduler\",\"securityContext\":{},\"terminationGracePeriodSeconds\":30}}},\"status\":{\"availableReplicas\":1,\"conditions\":[{\"lastTransitionTime\":\"2023-05-06T05:15:57Z\",\"lastUpdateTime\":\"2023-05-06T05:15:57Z\",\"message\":\"Deployment has minimum availability.\",\"reason\":\"MinimumReplicasAvailable\",\"status\":\"True\",\"type\":\"Available\"},{\"lastTransitionTime\":\"2023-05-06T05:15:53Z\",\"lastUpdateTime\":\"2023-05-06T05:34:36Z\",\"message\":\"ReplicaSet \\\"homo1-ssd-567495f7d5\\\" is progressing.\",\"reason\":\"ReplicaSetUpdated\",\"status\":\"True\",\"type\":\"Progressing\"}],\"observedGeneration\":12,\"readyReplicas\":1,\"replicas\":2,\"unavailableReplicas\":1,\"updatedReplicas\":1}}\n",
+            "linkerd.io/inject": "enabled",
+            "prometheus.io.scrape": "false"
+        },
+        "creationTimestamp": "2023-05-06T05:15:53Z",
+        "generation": 13,
+        "name": "homo1-ssd",
+        "namespace": "openfaas-fn",
+        "ownerReferences": [
+            {
+                "apiVersion": "openfaas.com/v1",
+                "blockOwnerDeletion": true,
+                "controller": true,
+                "kind": "Function",
+                "name": "homo1-ssd",
+                "uid": "fa53f303-52f4-44eb-8973-1e5fdde4a772"
+            }
+        ],
+        "resourceVersion": "23659221",
+        "uid": "ee577864-d4af-4651-8400-ad60b78a807c"
+    },
+    "spec": {
+        "progressDeadlineSeconds": 600,
+        "replicas": 1,
+        "revisionHistoryLimit": 5,
+        "selector": {
+            "matchLabels": {
+                "app": "homo1-ssd",
+                "controller": "homo1-ssd"
+            }
+        },
+        "strategy": {
+            "rollingUpdate": {
+                "maxSurge": 1,
+                "maxUnavailable": 1
+            },
+            "type": "RollingUpdate"
+        },
+        "template": {
+            "metadata": {
+                "annotations": {
+                    "com.openfaas.function.spec": "{\"name\":\"homo1-ssd\",\"image\":\"aslanpour/ssd:cpu-tpu\",\"annotations\":{\"com.openfaas.profile\":\"homo1-ssd\",\"linkerd.io/inject\":\"enabled\"},\"labels\":{\"com.openfaas.scale.factor\":\"0\",\"com.openfaas.scale.max\":\"1\",\"com.openfaas.scale.min\":\"1\",\"com.openfaas.scale.zero\":\"true\"},\"environment\":{\"COUNTER\":\"0\",\"REDIS_SERVER_IP\":\"10.43.189.161\",\"REDIS_SERVER_PORT\":\"3679\",\"exec_timeout\":\"15s\",\"handler_wait_duration\":\"15s\",\"read_timeout\":\"15s\",\"version\":\"3\",\"write_debug\":\"true\",\"write_timeout\":\"15s\"},\"constraints\":[\"kubernetes.io/hostname=homo1\"],\"limits\":{\"cpu\":\"3600m\"},\"requests\":{\"cpu\":\"1800m\"},\"readOnlyRootFilesystem\":false}",
+                    "com.openfaas.profile": "homo1-ssd",
+                    "linkerd.io/inject": "enabled",
+                    "prometheus.io.scrape": "false"
+                },
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "homo1-ssd",
+                    "com.openfaas.scale.factor": "0",
+                    "com.openfaas.scale.max": "1",
+                    "com.openfaas.scale.min": "1",
+                    "com.openfaas.scale.zero": "true",
+                    "controller": "homo1-ssd",
+                    "faas_function": "homo1-ssd"
+                }
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "env": [
+                            {
+                                "name": "COUNTER",
+                                "value": "0"
+                            },
+                            {
+                                "name": "REDIS_SERVER_IP",
+                                "value": "10.43.189.161"
+                            },
+                            {
+                                "name": "write_timeout",
+                                "value": "15s"
+                            },
+                            {
+                                "name": "version",
+                                "value": "3"
+                            },
+                            {
+                                "name": "write_debug",
+                                "value": "true"
+                            },
+                            {
+                                "name": "REDIS_SERVER_PORT",
+                                "value": "3679"
+                            },
+                            {
+                                "name": "exec_timeout",
+                                "value": "15s"
+                            },
+                            {
+                                "name": "handler_wait_duration",
+                                "value": "15s"
+                            },
+                            {
+                                "name": "read_timeout",
+                                "value": "15s"
+                            }
+                        ],
+                        "image": "aslanpour/ssd:cpu-tpu",
+                        "imagePullPolicy": "Always",
+                        "livenessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/_/health",
+                                "port": 8080,
+                                "scheme": "HTTP"
+                            },
+                            "initialDelaySeconds": 2,
+                            "periodSeconds": 2,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "name": "homo1-ssd",
+                        "ports": [
+                            {
+                                "containerPort": 8080,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/_/health",
+                                "port": 8080,
+                                "scheme": "HTTP"
+                            },
+                            "initialDelaySeconds": 2,
+                            "periodSeconds": 2,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {
+                            "limits": {
+                                "cpu": "3600m"
+                            },
+                            "requests": {
+                                "cpu": "1800m"
+                            }
+                        },
+                        "securityContext": {
+                            "allowPrivilegeEscalation": false,
+                            "readOnlyRootFilesystem": false
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File"
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "nodeSelector": {
+                    "kubernetes.io/hostname": "homo1"
+                },
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "terminationGracePeriodSeconds": 30
+            }
+        }
+    },
+    "status": {
+        "availableReplicas": 1,
+        "conditions": [
+            {
+                "lastTransitionTime": "2023-05-06T05:15:57Z",
+                "lastUpdateTime": "2023-05-06T05:15:57Z",
+                "message": "Deployment has minimum availability.",
+                "reason": "MinimumReplicasAvailable",
+                "status": "True",
+                "type": "Available"
+            },
+            {
+                "lastTransitionTime": "2023-05-06T05:15:53Z",
+                "lastUpdateTime": "2023-05-06T05:40:53Z",
+                "message": "ReplicaSet \"homo1-ssd-567495f7d5\" has successfully progressed.",
+                "reason": "NewReplicaSetAvailable",
+                "status": "True",
+                "type": "Progressing"
+            }
+        ],
+        "observedGeneration": 13,
+        "readyReplicas": 1,
+        "replicas": 1,
+        "updatedReplicas": 1
+    }
+}

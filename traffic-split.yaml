@@ -1,0 +1,14 @@
+apiVersion: split.smi-spec.io/v1alpha1
+kind: TrafficSplit
+metadata:
+  name: function-split
+  namespace: openfaas-fn
+spec:
+  # The root service that clients use to connect to the destination application.
+  service: gw-func
+  # Services inside the namespace with their own selectors, endpoints and configuration.
+  backends:
+#  - service: w2-ssd
+#    weight: 1000m
+  - service: w7-ssd
+    weight: 1000m

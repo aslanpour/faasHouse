@@ -1,0 +1,41 @@
+apiVersion: openfaas.com/v1
+kind: Function
+metadata:
+  annotations:
+    meta.helm.sh/release-name: chart-latest
+    meta.helm.sh/release-namespace: openfaas-fn
+  creationTimestamp: "2022-11-18T06:49:03Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  name: w5-ssd
+  namespace: openfaas-fn
+  resourceVersion: "8859242"
+  uid: 984ddeca-d567-473c-a632-55592b749d56
+spec:
+  annotations:
+    com.openfaas.profile: w5-ssd
+    linkerd.io/inject: enabled
+  environment:
+    COUNTER: "0"
+    REDIS_SERVER_IP: 10.43.189.161
+    REDIS_SERVER_PORT: "3679"
+    exec_timeout: 15s
+    handler_wait_duration: 15s
+    read_timeout: 15s
+    version: "1"
+    write_debug: "true"
+    write_timeout: 15s
+  image: aslanpour/ssd:cpu-tpu-gpu
+  labels:
+    com.openfaas.scale.factor: "100"
+    com.openfaas.scale.max: "1"
+    com.openfaas.scale.min: "1"
+    com.openfaas.scale.zero: "true"
+  limits:
+    cpu: 3600m
+    memory: ""
+  name: w5-ssd
+  requests:
+    cpu: 1000m
+    memory: ""

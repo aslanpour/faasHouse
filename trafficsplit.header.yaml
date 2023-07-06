@@ -1,0 +1,22 @@
+apiVersion: split.smi-spec.io/v1alpha4
+kind: TrafficSplit
+metadata:
+  name: ab-test
+spec:
+  service: cpu-tpu
+  matches:
+  - kind: HTTPRouteGroup
+    name: ab-test
+  backends:
+  - service: cpu-tpu-blue
+    weight: 0
+  - service: cpu-tpu-green
+    weight: 100
+---
+kind: HTTPRouteGroup
+metadata:
+  name: ab-test
+matches:
+- name: firefox-users
+  headers:
+    user-agent: ".*Callback*"

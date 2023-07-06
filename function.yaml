@@ -1,0 +1,47 @@
+apiVersion: openfaas.com/v1
+kind: Function
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"openfaas.com/v1","kind":"Function","metadata":{"annotations":{"meta.helm.sh/release-name":"chart-latest","meta.helm.sh/release-namespace":"openfaas-fn"},"generation":2,"labels":{"app.kubernetes.io/managed-by":"Helm"},"name":"homo1-ssd","namespace":"openfaas-fn","resourceVersion":"23657060"},"spec":{"annotations":{"com.openfaas.profile":"homo1-ssd","linkerd.io/inject":"enabled"},"constraints":["kubernetes.io/hostname=homo1"],"environment":{"COUNTER":"0","REDIS_SERVER_IP":"10.43.189.161","REDIS_SERVER_PORT":"3679","exec_timeout":"15s","handler_wait_duration":"15s","read_timeout":"15s","version":"1","write_debug":"true","write_timeout":"15s"},"image":"aslanpour/ssd:cpu-tpu","labels":{"com.openfaas.scale.factor":"0","com.openfaas.scale.max":"1","com.openfaas.scale.min":"1","com.openfaas.scale.zero":"true"},"limits":{"cpu":"3600m","memory":""},"name":"homo1-ssd","requests":{"cpu":"1800m","memory":""}}}
+    meta.helm.sh/release-name: chart-latest
+    meta.helm.sh/release-namespace: openfaas-fn
+  creationTimestamp: "2023-05-06T05:15:53Z"
+  generation: 2
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  name: homo1-ssd
+  namespace: openfaas-fn
+  resourceVersion: "23657374"
+  uid: fa53f303-52f4-44eb-8973-1e5fdde4a772
+spec:
+  annotations:
+    com.openfaas.profile: homo1-ssd
+    linkerd.io/inject: enabled
+  constraints:
+  - kubernetes.io/hostname=homo1
+  - kubernetes.io/hostname=homo2
+  - kubernetes.io/hostname=homo3
+  environment:
+    COUNTER: "0"
+    REDIS_SERVER_IP: 10.43.189.161
+    REDIS_SERVER_PORT: "3679"
+    exec_timeout: 15s
+    handler_wait_duration: 15s
+    read_timeout: 15s
+    version: "1"
+    write_debug: "true"
+    write_timeout: 15s
+  image: aslanpour/ssd:cpu-tpu
+  labels:
+    com.openfaas.scale.factor: "0"
+    com.openfaas.scale.max: "1"
+    com.openfaas.scale.min: "1"
+    com.openfaas.scale.zero: "true"
+  limits:
+    cpu: 3600m
+    memory: ""
+  name: homo1-ssd
+  requests:
+    cpu: 1800m
+    memory: ""

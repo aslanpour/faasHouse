@@ -1,0 +1,34 @@
+apiVersion: openfaas.com/v1
+kind: Function
+metadata:
+  name: w22-ssd
+  namespace: openfaas-fn
+spec:
+  constraints: 
+  - "io/hostname=homo2"
+
+  annotations:
+    com.openfaas.profile: w22-ssd
+    linkerd.io/inject: disabled
+  environment:
+    COUNTER: "0"
+    REDIS_SERVER_IP: 10.43.189.161
+    REDIS_SERVER_PORT: "3679"
+    exec_timeout: 15s
+    handler_wait_duration: 15s
+    read_timeout: 15s
+    version: "1"
+    write_debug: "true"
+    write_timeout: 15s
+  image: nginx
+  labels:
+    com.openfaas.scale.factor: "100"
+    com.openfaas.scale.max: "1"
+    com.openfaas.scale.min: "1"
+  limits:
+    cpu: 3600m
+    memory: ""
+  name: w22-ssd
+  requests:
+    cpu: 100m
+    memory: ""

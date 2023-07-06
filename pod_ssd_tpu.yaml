@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ssd-tpu
+spec:
+  nodeName: w6
+  containers:
+  - name: ssd-tpu
+    image: aslanpour/ssd:cpu-tpu
+#    securityContext:
+#      privileged: true

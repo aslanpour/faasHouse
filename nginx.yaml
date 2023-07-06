@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: openfaas-fn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-v1
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: nginx-v1
+        version: v1
+      annotations:
+        istio-injection: "enabled"
+        linkerd.io/inject: "enabled"
+    spec:
+      nodeName: master
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80 
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-nginx
+  namespace: openfaas-fn
+spec:
+  selector:
+    app: nginx-v1
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: svc-nginx-gw
+#   namespace: myns
+# spec:
+#   selector:
+#     app: nginx-gw
+#   ports:
+#   - protocol: TCP
+#     port: 80
+#     targetPort: 80
