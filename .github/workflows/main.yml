@@ -1,8 +1,23 @@
-name: run-hedgi
+name: SSH and Service Restart
 run-name: ${{ github.actor }} is running hedgi from github
-on: [push]
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  check-bats-version:
+  ssh_and_restart_service:
     runs-on: ubuntu-latest
+
     steps:
-      - run: sudo systemctl restart hedgi.service
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+
+      - name: SSH to remote server and restart service
+        run: |
+          echo "${{ secrets.REMOTE_SERVER_PRIVATE_KEY }}" > ssh_key.pem
+          chmod 600 ssh_key.pem
+          sshpass -p ${{ REMOTE_SERVER_SSH_PASS }}  ssh -i ssh_key.pem ${{ secrets.REMOTE_SERVER_USERNAME }}@${{ secrets.REMOTE_SERVER_ROUTER_IP }} "touch github-runner.txt"
