@@ -18,7 +18,5 @@ jobs:
 
       - name: SSH to remote server and restart service
         run: |
-          echo "${{ secrets.REMOTE_SERVER_PRIVATE_KEY }}" > ssh_key.pem
-          chmod 600 ssh_key.pem
           sshpass -p "esi" ubuntu@218.214.101.139 "ls"
           
