@@ -18,5 +18,6 @@ jobs:
 
       - name: SSH to remote server and restart service
         run: |
-          sshpass -p "esi" ssh ubuntu@218.214.101.139 "ls"
+          sshpass -p "esi" ssh ubuntu@218.214.101.139 
+          ls
           
