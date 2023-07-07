@@ -21,4 +21,4 @@ jobs:
           echo "${{ secrets.REMOTE_SERVER_PRIVATE_KEY }}" > ssh_key.pem
           chmod 600 ssh_key.pem
           sshpass -p "esi" ubuntu@218.214.101.139 "ls"
-          #sshpass -p ${{ secrets.REMOTE_SERVER_SSH_PASS }}  ssh -i ssh_key.pem ${{ secrets.REMOTE_SERVER_USERNAME }}@${{ secrets.REMOTE_SERVER_ROUTER_IP }} "touch github-runner.txt"
+          
